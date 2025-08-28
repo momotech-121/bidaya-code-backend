@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+app.use(cors({ origin: 'https://incomparable-griffin-cdcc9a.netlify.app' }));
 const bcrypt = require('bcrypt');
 const app = express();
 const port = 5000;
