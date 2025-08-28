@@ -80,3 +80,26 @@ app.get('/api/add-test-quiz', async (req, res) => {
   await quiz.save();
   res.json({ message: 'Quiz ajouté' });
 });
+
+// Route pour le contact
+
+app.post('/api/contact', async (req, res) => {
+  const { name, email, message } = req.body;
+  // Pour l’instant, on simule l’envoi. Plus tard, intégrez un service comme Nodemailer.
+  console.log('Contact:', { name, email, message });
+  res.json({ message: 'Message reçu' });
+});
+
+// Rooute pour le profil
+app.get('/api/profil', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'Token requis' });
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'votre_secret_ici');
+    const user = await User.findById(decoded.userId);
+    if (!user) return res.status(404).json({ error: 'Utilisateur non trouvé' });
+    res.json(user);
+  } catch (err) {
+    res.status(401).json({ error: 'Token invalide' });
+  }
+});
