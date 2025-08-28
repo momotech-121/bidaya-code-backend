@@ -6,7 +6,7 @@ const app = express();
 const port = 5000;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: 'https://incomparable-griffin-cdcc9a.netlify.app' }));
 
 // Connexion MongoDB (remplacez par MongoDB Atlas si souhaité)
 mongoose.connect('mongodb://127.0.0.1:27017/bidaya', { useNewUrlParser: true, useUnifiedTopology: true })
